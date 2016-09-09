@@ -32,6 +32,58 @@
 		}
 	}
 	
+	class signin
+	{
+		function sigin_check($name, $pass)
+		{
+			$server = 'localhost';
+			$username = 'root';
+			$password = '';
+			$database = 'yamakoko';
+	
+			$con = mysqli_connect($server, $username, $password);
+	
+			$db = mysqli_select_db($con, $database);
+			
+			$query = "select * from userinfo where username = '".$name."' and password = '".$pass."'";
+			
+			$result = mysqli_query($con, $query);
+			
+			$num = mysqli_num_rows($result);
+			
+			if($num > 0)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+			
+		}
+		
+		function signin_session($name, $pass)
+		{
+			$server = 'localhost';
+			$username = 'root';
+			$password = '';
+			$database = 'yamakoko';
+	
+			$con = mysqli_connect($server, $username, $password);
+	
+			$db = mysqli_select_db($con, $database);
+			
+			$query = "select * from userinfo where username = '".$name."' and password = '".$pass."'";
+			
+			$result = mysqli_query($con, $query);
+			
+			$arr = mysqli_fetch_array($result);
+			return $arr;
+			
+			
+		}
+	}
+	
 	class signup
 	{
 		
@@ -59,6 +111,28 @@
 				return false;
 			}
 			
+		}
+		
+	}
+	
+	class prodect
+	{
+		
+		function prodect_sale()
+		{
+			$server = 'localhost';
+			$username = 'root';
+			$password = '';
+			$database = 'yamakoko';
+	
+			$con = mysqli_connect($server, $username, $password);
+	
+			$db = mysqli_select_db($con, $database);
+			
+			$query = "select * from p_sale";
+			
+			$result = mysqli_query($con, $query);
+			return $result;
 		}
 		
 	}

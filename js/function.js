@@ -26,6 +26,7 @@
 			if(userlength < 4)
 			{
 				$('#home_errorMessageUsername').text("＊At least more than 4 letters.");
+				return false;
 			}
 			else
 			{
@@ -35,11 +36,15 @@
 			if(passlength < 4)
 			{
 				$('#home_errorMessagePassword').text("＊At least more than 4 letters.");
+				return false;
 			}
 			else
 			{
 				$('#home_errorMessagePassword').empty();;
 			}
+			
+			
+			signin(usernamev, passwordv);
 			
 		});
 		
@@ -258,10 +263,45 @@
 			
 		});
 		
+		/* product.phpのjsここから*/
+		$('.prodect_productPic').click(function(){
+			
+			var iid = $(this).attr('iid');
+			product_id(iid);
+			
+		});
 		
 	});
 	
-	/* contact_send_db.phpのjsここまで*/
+	
+	
+	/*signinのajax*/
+	function signin(inusername, inpassword)
+	{
+		$.ajax({
+			type : "POST",
+			url : "signinControler.php",
+			data : {inusername : inusername, inpassword : inpassword},
+			dataType : "text",
+			beforeSend : function()
+			{
+				$('#home_loginBtn').attr('value', 'processing');
+			},
+			success : function(response)
+			{
+				if(response == 'yamakoko_loginTop.php')
+				{
+				//alert(response);
+				 window.location.href = response;
+				}
+				else
+				{
+					$('#home_errorMessageUsername').text('Username or Password is wrong. Try Again.');
+				}
+			}
+			
+		});
+	}
 	
 	function signup(sname, semail, spassword)
 	{
@@ -321,6 +361,20 @@
 			}
 		});
 	}
+	
+	// function product_id(iid)
+	// {
+		// $.ajax({
+			// type : "POST",
+			// url : "",
+			// data : {iid : iid},
+			// dataType : "test",
+			// success : function(response)
+			// {
+				
+			// }
+		// });
+	// }
 	
 
 

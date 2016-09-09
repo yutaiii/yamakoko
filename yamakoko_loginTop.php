@@ -1,14 +1,23 @@
 <?php
+	session_start();
 	include('parts/yamakoko_head.php');
+	if(isset($_SESSION['username']))
+	{
 	include('parts/yamakoko_header.php');
 ?>
 
+	
 	<div class="loginTop_main">
-	<div class="loginTop_backFilter">
+		Thank you for sign up!
 	</div>
-	<p>hiiiiiiii</p>
-	</div>
+	
 
 <?php
 	include('parts/yamakoko_footer.php');
+	}
+	else
+	{
+		echo '<script type="text/javascript"> window.location = "yamakoko_home.php" </script>';
+	}
 ?>
+	
